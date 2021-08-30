@@ -21,6 +21,8 @@ public final class SpriteSheet {
         public let end: IntVector2
         public let referencePoint: IntVector2
         
+        public var size: IntVector2 { end - start }
+        
         public init(start: IntVector2, end: IntVector2, referencePoint: IntVector2) {
             self.start = start
             self.end = end

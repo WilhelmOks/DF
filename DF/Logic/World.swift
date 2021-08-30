@@ -7,18 +7,6 @@
 
 import Foundation
 
-public class WorldEntity: Equatable {
-    public static func == (lhs: WorldEntity, rhs: WorldEntity) -> Bool {
-        false
-    }
-} //TODO: ...
-
-public class ItemGrabberMarker: Equatable {
-    public static func == (lhs: ItemGrabberMarker, rhs: ItemGrabberMarker) -> Bool {
-        false
-    }
-} //TODO: ...
-
 public final class World {
     public let globalSeed = 1337
     
@@ -38,7 +26,7 @@ public final class World {
     
     public let registeredPlayers: [Player] = []
     
-    public private(set) var entitiesToDestroy: [WorldEntity] = []
+    public var entitiesToDestroy: [WorldEntity] = []
     public private(set) var entitiesMarkedForDestruction: ListDictionary<Player, WorldEntity> = .init()
         
     public var hoveredCells: [Player: IntVector2] = [:]
@@ -50,12 +38,16 @@ public final class World {
     
     public private(set) var itemGrabberMarkedLocations: ListDictionary<IntVector2, ItemGrabberMarker> = .init()
     
+    private var workerBotsAdded = false
+    
     init(game: Game) {
         self.game = game
         
         pathFinder = PathFinder()
         generator = WorldGenerator(world: self)
     }
+    
+    //TODO: ...
     
     public func getAllVoronoiPoints() -> [(cellCoordinates: IntVector2, ground: Ground)] {
         var result: [(cellCoordinates: IntVector2, ground: Ground)] = []
@@ -78,5 +70,7 @@ public final class World {
         return cell
     }
     
-    
+    public func update(elapsedTime: TimeInterval) {
+        //TODO: ...
+    }
 }

@@ -33,6 +33,11 @@ public extension Vector2 {
 }
 
 public extension Vector2 {
+    static let unitX: Vector2 = .init(x: 1, y: 0)
+    static let unitY: Vector2 = .init(x: 0, y: 1)
+}
+
+public extension Vector2 {
     func angleDelta(to: Vector2) -> Double {
         atan2(self.x * to.y - self.y * to.x, self.x * to.x + self.y * to.y)
     }

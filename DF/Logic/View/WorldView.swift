@@ -130,9 +130,9 @@ public extension WorldView {
                 for entity in entities {
                     switch entity {
                     case let workerBot as WorkerBotEntity:
-                            var offset = workerBot.realOffset * zoomedCellSizeHalf
-                            var shadowBitmap = bitmaps.effects.shadow!
-                            var shadowRenderSize = shadowBitmap.sizeInPixels.vector2 * viewPort.spaceZoom
+                        let offset = workerBot.realOffset * zoomedCellSizeHalf
+                        let shadowBitmap = bitmaps.effects.shadow!
+                        let shadowRenderSize = shadowBitmap.sizeInPixels.vector2 * viewPort.spaceZoom
                         gameView.renderer.drawBitmapFromSpriteBatch(shadowBitmap, location: p + offset, size: shadowRenderSize)
                     default:
                         break
@@ -149,60 +149,60 @@ public extension WorldView {
                 for entity in entities {
                     switch entity {
                     case let buildingEntity as BuildingEntity:
-                        if buildingEntity.buildingType == gameView.game.buildingTypes.inserter {
+                        if buildingEntity.buildingType === gameView.game.buildingTypes.inserter {
                             do { //base
-                                var bitmap = bitmaps.entities.buildings.itemGrabberBase!
-                                var offset = buildingEntity.realOffset * zoomedCellSizeHalf
-                                var renderOffset = Vector2(-32, -32) * viewPort.spaceZoom
-                                var renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom * 1.0
+                                let bitmap = bitmaps.entities.buildings.itemGrabberBase!
+                                let offset = buildingEntity.realOffset * zoomedCellSizeHalf
+                                let renderOffset = Vector2(-32, -32) * viewPort.spaceZoom
+                                let renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom * 1.0
                                 gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset + renderOffset, size: renderSize)
                             }
 
                             do { //hand
-                                var bitmap = bitmaps.entities.buildings.itemGrabberHand!
+                                let bitmap = bitmaps.entities.buildings.itemGrabberHand!
                                 var offset = buildingEntity.realOffset * zoomedCellSizeHalf
-                                offset += buildingEntity.itemGrabber.handLocation * zoomedCellSize
-                                var renderOffset = Vector2(-32, -32) * viewPort.spaceZoom
-                                var renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom * 1.0
+                                offset += (buildingEntity.itemGrabber?.handLocation ?? .zero) * zoomedCellSize
+                                let renderOffset = Vector2(-32, -32) * viewPort.spaceZoom
+                                let renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom * 1.0
                                 gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset + renderOffset, size: renderSize)
                             }
-                        }
-                        else
-                        {
-                            var bitmap = bitmaps.entities.buildings.container!
-                            var offset = buildingEntity.realOffset * zoomedCellSizeHalf
-                            var renderOffset = Vector2(-19, -27) * viewPort.spaceZoom
-                            var renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom * 1.3
+                        } else {
+                            let bitmap = bitmaps.entities.buildings.container!
+                            let offset = buildingEntity.realOffset * zoomedCellSizeHalf
+                            let renderOffset = Vector2(-19, -27) * viewPort.spaceZoom
+                            let renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom * 1.3
                             gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset + renderOffset, size: renderSize)
                         }
-                    case let refinableEntity as RefinableEntity where refinableEntity.refinableType == gameView.game.refinableTypes.tree:
-                        var variant = refinableEntity.variant
-                        var sheet = bitmaps.treesTest!
-                        var offset = refinableEntity.realOffset * zoomedCellSizeHalf + zoomedCellSizeHalf * 0.5
-                        var tintValue = Float(sin((destructionSelectionAnimationTime / destructionSelectionAnimationInterval) * Double.pi * 2) * 0.5 + 0.5)
+                    case let refinableEntity as RefinableEntity where refinableEntity.refinableType === gameView.game.refinableTypes.tree:
+                        let variant = refinableEntity.variant
+                        let sheet = bitmaps.treesTest!
+                        let offset = refinableEntity.realOffset * zoomedCellSizeHalf + zoomedCellSizeHalf * 0.5
+                        let tintValue = Float(sin((destructionSelectionAnimationTime / destructionSelectionAnimationInterval) * Double.pi * 2) * 0.5 + 0.5)
                         var tint = SIMD4<Float>.one //Vector4.One;
                         if !gameView.game.world.entitiesMarkedForDestruction.keys(containing: refinableEntity).isEmpty {
                             tint = SIMD4<Float>(1.0, 1.0 - tintValue * 0.5, 1.0 - tintValue * 0.5, 1.0)
                         }
-                        gameView.renderer.drawBitmapFromSpriteSheetBatch(sheet, variant, p + offset, sheet.regions[variant].count * viewPort.spaceZoom/* * 0.7f*/, tint)
+                        gameView.renderer.drawBitmapFromSpriteSheetBatch(spriteSheet: sheet, index: variant, location: p + offset, size: sheet.regions[variant].size * viewPort.spaceZoom/* * 0.7f*/, tint: tint)
                     case let workerBot as WorkerBotEntity:
-                        var bitmap = bitmaps.entities.workerBot!
-                        var offset = workerBot.realOffset * zoomedCellSizeHalf
-                        var dummyLevitationAnimationOffset = (sin((destructionSelectionAnimationTime / destructionSelectionAnimationInterval) * Double.pi * 2) * 0.5 + 0.5) * viewPort.spaceZoom * 2.5
-                        var elevationOffset = zoomedCellSizeHalf.y + dummyLevitationAnimationOffset
-                        var renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom
+                        let bitmap = bitmaps.entities.workerBot!
+                        let offset = workerBot.realOffset * zoomedCellSizeHalf
+                        let dummyLevitationAnimationOffset = (sin((destructionSelectionAnimationTime / destructionSelectionAnimationInterval) * Double.pi * 2) * 0.5 + 0.5) * viewPort.spaceZoom * 2.5
+                        let elevationOffset = zoomedCellSizeHalf.y + dummyLevitationAnimationOffset
+                        let renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom
                         gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset + Vector2(0, -elevationOffset), size: renderSize)
 
+                        //TODO: uncomment
+                        /*
                         if workerBot.isAttacking, let attackEntityAction = workerBot.plannedAction as? AttackEntityAction {
                             var attackEffect = bitmaps.effects.beam!
                             var diff = (attackEntityAction.entityToAttack.cellLocation - workerBot.cellLocation).vector2 * worldViewCellSize.vector2 + (attackEntityAction.entityToAttack.realOffset - workerBot.realOffset) * worldViewCellSize.vector2 * 0.5
                             var rotationAngle = atan2(diff.y, diff.x)
                             gameView.renderer.drawBitmapFromSpriteBatch(attackEffect, location: p + offset + Vector2(0, -elevationOffset) + renderSize * 0.5 + Vector2(0, -3) * viewPort.spaceZoom, size: attackEffect.sizeInPixels.vector2 * viewPort.spaceZoom, rotationAngle: rotationAngle, rotationPoint: Vector2(0, Double(attackEffect.sizeInPixels.y) * 0.5))
-                        }
+                        }*/
                     case let itemEntity as ItemEntity:
-                            var bitmap = bitmaps.items.wood!
-                            var offset = itemEntity.realOffset * zoomedCellSizeHalf
-                            //var bitmapCenterOffset = bitmap.SizeInPixels * (0.5f * ViewPort.SpaceZoom);
+                        let bitmap = bitmaps.items.wood!
+                        let offset = itemEntity.realOffset * zoomedCellSizeHalf
+                        //var bitmapCenterOffset = bitmap.SizeInPixels * (0.5f * ViewPort.SpaceZoom);
                         gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset/* - bitmapCenterOffset*/, size: bitmap.sizeInPixels.vector2 * viewPort.spaceZoom)
                     default:
                         break
@@ -214,20 +214,20 @@ public extension WorldView {
         //markers:
         for cellLocation in Grid.coordinatesInRange(offset: startCell - IntVector2.one * 2, size: cellRange + IntVector2.one * 4) {
             if let markers = world.itemGrabberMarkedLocations[cellLocation] {
-                var p = vpcMinusZso + cellLocation.vector2 * zoomedCellSize + zoomedCellSizeHalf
+                let p = vpcMinusZso + cellLocation.vector2 * zoomedCellSize + zoomedCellSizeHalf
 
                 for marker in markers {
                     switch marker {
-                    case let inputMarker as ItemGrabberInputMarker:
-                        var offset = -zoomedCellSizeHalf;
-                        var bitmap = bitmaps.markers.itemGrabberInput!
-                        var renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom
+                    case is ItemGrabberInputMarker:
+                        let offset = -zoomedCellSizeHalf;
+                        let bitmap = bitmaps.markers.itemGrabberInput!
+                        let renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom
                         gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset, size: renderSize)
 
-                    case let outputMarker as ItemGrabberOutputMarker:
-                        var offset = -zoomedCellSizeHalf
-                        var bitmap = bitmaps.markers.itemGrabberOutput!
-                        var renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom
+                    case is ItemGrabberOutputMarker:
+                        let offset = -zoomedCellSizeHalf
+                        let bitmap = bitmaps.markers.itemGrabberOutput!
+                        let renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom
                         gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset, size: renderSize)
                         
                     default:
