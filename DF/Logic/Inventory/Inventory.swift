@@ -48,7 +48,7 @@ public extension Inventory {
         slots.firstIndex{ $0 == nil }
     }
     
-    mutating func transfer<Inv>(to targetInventory: inout Inv) -> Int where Inv: IInventory, Inv.T == Self.T {
+    func transfer<Inv>(to targetInventory: inout Inv) -> Int where Inv: Inventory, Inv.T == Self.T {
         var transferred = 0
         let itemTypes = distinctContents()
         for itemType in itemTypes {
@@ -57,7 +57,7 @@ public extension Inventory {
         return transferred
     }
     
-    mutating func transfer<Inv>(to targetInventory: inout Inv, itemType: T) -> Int where Inv: IInventory, Inv.T == Self.T {
+    func transfer<Inv>(to targetInventory: inout Inv, itemType: T) -> Int where Inv: Inventory, Inv.T == Self.T {
         let removed = remove(itemType: itemType)
         let transferred = targetInventory.add(itemType: itemType, numberOfItems: removed)
         let toPutBack = removed - transferred
@@ -67,11 +67,11 @@ public extension Inventory {
         return transferred
     }
     
-    func canTransferAny<Inv>(targetInventory: Inv) -> Bool where Inv: IInventory, Inv.T == Self.T {
+    func canTransferAny<Inv>(targetInventory: Inv) -> Bool where Inv: Inventory, Inv.T == Self.T {
         distinctContents().contains{ targetInventory.canBeAddedAny(itemType: $0) }
     }
     
-    func canTransferAny<Inv>(targetInventory: Inv, itemType: Inv.T) -> Bool where Inv: IInventory, Inv.T == Self.T {
+    func canTransferAny<Inv>(targetInventory: Inv, itemType: T) -> Bool where Inv: Inventory, Inv.T == Self.T {
         if !contains(itemType: itemType) {
             return false
         } else {
