@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol SingleSlotsInventory: Inventory where TSlot == T, T: Equatable & Hashable {
+public protocol SingleSlotsInventory: Inventory where T: Equatable & Hashable {
     
 }
 

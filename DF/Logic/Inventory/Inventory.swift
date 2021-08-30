@@ -7,10 +7,8 @@
 
 import Foundation
 
-public protocol Inventory: IInventory, CustomStringConvertible {
-    associatedtype TSlot
-    
-    var slots: [TSlot?] { get set }
+public protocol Inventory: IInventory, CustomStringConvertible {    
+    var slots: [T?] { get set }
     
     func handleAdded()
     func handleRemoved()
@@ -19,7 +17,7 @@ public protocol Inventory: IInventory, CustomStringConvertible {
 public extension Inventory {
     var numberOfSlots: Int { slots.count }
     
-    subscript(_ slotIndex: Int) -> TSlot? {
+    subscript(_ slotIndex: Int) -> T? {
         get {
             slots[slotIndex]
         }

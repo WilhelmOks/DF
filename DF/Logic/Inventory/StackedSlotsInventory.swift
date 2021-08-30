@@ -7,8 +7,9 @@
 
 import Foundation
 
-public protocol StackedSlotsInventory: Inventory where TSlot == InventorySlotStack<T>, T: Equatable & Hashable {
-    func maxStackSize(itemType: T) -> Int
+public protocol StackedSlotsInventory: Inventory where T == InventorySlotStack<IT>, IT: Equatable & Hashable {
+    associatedtype IT
+    func maxStackSize(itemType: IT) -> Int
 }
 
 public extension StackedSlotsInventory {
@@ -16,7 +17,7 @@ public extension StackedSlotsInventory {
         slots.allSatisfy{ slot in slot.flatMap{ $0.numberOfItems >= maxStackSize(itemType: $0.itemType) } ?? false }
     }
     
-    mutating func add(itemType: T, numberOfItems: Int) -> Int {
+    mutating func add(itemType: IT, numberOfItems: Int) -> Int {
         assert(numberOfItems > 0)
         guard numberOfItems > 0 else { return 0 }
         
@@ -63,7 +64,7 @@ public extension StackedSlotsInventory {
         return added
     }
     
-    func canBeAddedCount(itemType: T) -> Int {
+    func canBeAddedCount(itemType: IT) -> Int {
         let maxStackSize = maxStackSize(itemType: itemType)
         var canBeAdded = 0
 
@@ -81,7 +82,7 @@ public extension StackedSlotsInventory {
         return canBeAdded
     }
     
-    func canBeAddedAny(itemType: T) -> Bool {
+    func canBeAddedAny(itemType: IT) -> Bool {
         let maxStackSize = maxStackSize(itemType: itemType)
         
         for i in 0..<numberOfSlots {
@@ -95,15 +96,15 @@ public extension StackedSlotsInventory {
         return false
     }
     
-    func count(itemType: T) -> Int {
+    func count(itemType: IT) -> Int {
         slots.compactMap{$0}.filter{ $0.itemType == itemType }.map(\.numberOfItems).sum()
     }
     
-    func contains(itemType: T) -> Bool {
+    func contains(itemType: IT) -> Bool {
         slots.contains{ $0?.itemType == itemType }
     }
     
-    mutating func remove(itemType: T, numberOfItems: Int) -> Int {
+    mutating func remove(itemType: IT, numberOfItems: Int) -> Int {
         var removed = 0
         var remainingToRemove = numberOfItems
         
@@ -133,7 +134,7 @@ public extension StackedSlotsInventory {
         return removed
     }
     
-    mutating func remove(itemType: T) -> Int {
+    mutating func remove(itemType: IT) -> Int {
         var removed = 0
 
         for i in (0..<numberOfSlots).reversed() {
@@ -150,7 +151,7 @@ public extension StackedSlotsInventory {
         return removed
     }
     
-    func distinctContents() -> [T] {
+    func distinctContents() -> [IT] {
         slots.compactMap{ $0?.itemType }.uniqueElements()
     }
     
