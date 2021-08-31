@@ -9,6 +9,8 @@ import Foundation
 
 //public class InventorySlotStack<T>: CustomStringConvertible {
 public struct InventorySlotStack<T>: CustomStringConvertible {
+    public typealias IT = T
+    
     public var itemType: T
     public var numberOfItems: Int
 

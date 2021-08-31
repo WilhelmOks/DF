@@ -7,16 +7,12 @@
 
 import Foundation
 
-public protocol SingleSlotsInventory: Inventory where T: Equatable & Hashable {
-    
-}
-
-public extension SingleSlotsInventory {
-    func isFull() -> Bool {
+public class SingleSlotsInventory<IT>: Inventory<IT, IT> where IT: Equatable & Hashable {
+    public override func isFull() -> Bool {
         slots.allSatisfy{ $0 != nil }
     }
     
-    mutating func add(itemType: T, numberOfItems: Int) -> Int {
+    public override func add(itemType: IT, numberOfItems: Int) -> Int {
         assert(numberOfItems > 0)
         guard numberOfItems > 0 else { return 0 }
         
@@ -41,23 +37,23 @@ public extension SingleSlotsInventory {
         return added
     }
     
-    func canBeAddedCount(itemType: T) -> Int {
+    public override func canBeAddedCount(itemType: IT) -> Int {
         slots.filter{ $0 == nil }.count
     }
     
-    func canBeAddedAny(itemType: T) -> Bool {
+    public override func canBeAddedAny(itemType: IT) -> Bool {
         !isFull()
     }
     
-    func count(itemType: T) -> Int {
+    public override func count(itemType: IT) -> Int {
         slots.filter{ $0 == itemType }.count
     }
     
-    func contains(itemType: T) -> Bool {
+    public override func contains(itemType: IT) -> Bool {
         slots.contains(itemType)
     }
     
-    mutating func remove(itemType: T, numberOfItems: Int) -> Int {
+    public override func remove(itemType: IT, numberOfItems: Int) -> Int {
         assert(numberOfItems > 0)
         guard numberOfItems > 0 else { return 0 }
         
@@ -83,7 +79,7 @@ public extension SingleSlotsInventory {
         return removed
     }
     
-    mutating func remove(itemType: T) -> Int {
+    public override func remove(itemType: IT) -> Int {
         var removed = 0
 
         for i in (0..<numberOfSlots).reversed() {
@@ -101,11 +97,11 @@ public extension SingleSlotsInventory {
         return removed
     }
     
-    func distinctContents() -> [T] {
+    public override func distinctContents() -> [IT] {
         slots.compactMap{$0}.uniqueElements()
     }
     
-    mutating func removeOneFromSlot(_ slotIndex: Int) -> Bool {
+    public override func removeOneFromSlot(_ slotIndex: Int) -> Bool {
         let slot = slots[slotIndex]
         if slot == nil {
             return false

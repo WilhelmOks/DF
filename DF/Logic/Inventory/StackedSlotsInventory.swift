@@ -7,17 +7,17 @@
 
 import Foundation
 
-public protocol StackedSlotsInventory: Inventory where T == InventorySlotStack<IT>, IT: Equatable & Hashable {
-    associatedtype IT
-    func maxStackSize(itemType: IT) -> Int
-}
-
-public extension StackedSlotsInventory {
-    func isFull() -> Bool {
+public class StackedSlotsInventory<IT>: Inventory<InventorySlotStack<IT>, IT> where IT: Equatable & Hashable {
+    public func maxStackSize(itemType: IT) -> Int {
+        //need to be overridden
+        0
+    }
+    
+    public override func isFull() -> Bool {
         slots.allSatisfy{ slot in slot.flatMap{ $0.numberOfItems >= maxStackSize(itemType: $0.itemType) } ?? false }
     }
     
-    mutating func add(itemType: IT, numberOfItems: Int) -> Int {
+    public override func add(itemType: IT, numberOfItems: Int) -> Int {
         assert(numberOfItems > 0)
         guard numberOfItems > 0 else { return 0 }
         
@@ -64,7 +64,7 @@ public extension StackedSlotsInventory {
         return added
     }
     
-    func canBeAddedCount(itemType: IT) -> Int {
+    public override func canBeAddedCount(itemType: IT) -> Int {
         let maxStackSize = maxStackSize(itemType: itemType)
         var canBeAdded = 0
 
@@ -82,7 +82,7 @@ public extension StackedSlotsInventory {
         return canBeAdded
     }
     
-    func canBeAddedAny(itemType: IT) -> Bool {
+    public override func canBeAddedAny(itemType: IT) -> Bool {
         let maxStackSize = maxStackSize(itemType: itemType)
         
         for i in 0..<numberOfSlots {
@@ -96,15 +96,15 @@ public extension StackedSlotsInventory {
         return false
     }
     
-    func count(itemType: IT) -> Int {
+    public override func count(itemType: IT) -> Int {
         slots.compactMap{$0}.filter{ $0.itemType == itemType }.map(\.numberOfItems).sum()
     }
     
-    func contains(itemType: IT) -> Bool {
+    public override func contains(itemType: IT) -> Bool {
         slots.contains{ $0?.itemType == itemType }
     }
     
-    mutating func remove(itemType: IT, numberOfItems: Int) -> Int {
+    public override func remove(itemType: IT, numberOfItems: Int) -> Int {
         var removed = 0
         var remainingToRemove = numberOfItems
         
@@ -134,7 +134,7 @@ public extension StackedSlotsInventory {
         return removed
     }
     
-    mutating func remove(itemType: IT) -> Int {
+    public override func remove(itemType: IT) -> Int {
         var removed = 0
 
         for i in (0..<numberOfSlots).reversed() {
@@ -151,11 +151,11 @@ public extension StackedSlotsInventory {
         return removed
     }
     
-    func distinctContents() -> [IT] {
+    public override func distinctContents() -> [IT] {
         slots.compactMap{ $0?.itemType }.uniqueElements()
     }
     
-    mutating func removeOneFromSlot(_ slotIndex: Int) -> Bool {
+    public override func removeOneFromSlot(_ slotIndex: Int) -> Bool {
         if var slot = slots[slotIndex] {
             slot.numberOfItems -= 1
             if slot.numberOfItems <= 0 {
