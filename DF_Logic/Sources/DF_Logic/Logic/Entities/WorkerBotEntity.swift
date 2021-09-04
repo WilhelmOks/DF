@@ -10,7 +10,7 @@ import Foundation
 public final class WorkerBotEntity: MobileEntity {
     //TODO: ...
     
-    public override init(game: Game) {
-        super.init(game: game)
+    public override init(game: Game, seed: UInt64) {
+        super.init(game: game, seed: seed)
     }
 }

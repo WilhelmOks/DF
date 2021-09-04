@@ -84,6 +84,16 @@ public final class World {
         return cell
     }
     
+    public static func cellIsNeighbor(_ cellPosition1: IntVector2, _ cellPosition2: IntVector2) -> Bool {
+        let ds = cellPosition1.distanceSquared(to: cellPosition2)
+        return ds > 0 && ds < 3
+    }
+    
+    public func cellIsPassableForEntity(location: IntVector2, entity: WorldEntity) -> Bool {
+        let entities = entities[location] ?? []
+        return entities.isEmpty || entities.contains(entity) || entities.allSatisfy{ $0.passable }
+    }
+    
     public func update(elapsedTime: TimeInterval) {
         //TODO: ...
     }
