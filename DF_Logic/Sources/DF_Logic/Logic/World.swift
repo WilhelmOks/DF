@@ -49,6 +49,20 @@ public final class World {
     
     //TODO: ...
     
+    public func addEntity(_ entity: WorldEntity) {
+        entities.add(value: entity, forKey: entity.cellLocation)
+        
+        switch entity {
+        case let buildingEntity as BuildingEntity:
+            if let itemGrabber = buildingEntity.itemGrabber {
+                itemGrabberMarkedLocations.add(value: itemGrabber.inputMarker, forKey: itemGrabber.inputMarker.location)
+                itemGrabberMarkedLocations.add(value: itemGrabber.outputMarker, forKey: itemGrabber.outputMarker.location)
+            }
+        default:
+            break
+        }
+    }
+    
     public func getAllVoronoiPoints() -> [(cellCoordinates: IntVector2, ground: Ground)] {
         var result: [(cellCoordinates: IntVector2, ground: Ground)] = []
         for chunk in voronoiPointsChunks.allChunks() {

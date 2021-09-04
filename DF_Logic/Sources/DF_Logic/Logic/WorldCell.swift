@@ -12,6 +12,8 @@ public struct WorldCell {
     public let wall: Wall
 
     public var groundVariant: Int
+    
+    static let none: WorldCell = .init(ground: .none, wall: .none, groundVariant: 0)
 }
 
 public enum Ground: Int {

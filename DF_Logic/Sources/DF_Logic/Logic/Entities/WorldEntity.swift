@@ -22,7 +22,7 @@ public class WorldEntity: Entity, Identifiable {
     private let offsetRange2 = Vector2(Double(offsetRange), Double(offsetRange))
     public var realOffset: Vector2 { (offset.vector2 - offsetRange2 * 0.5) / offsetRange2 }
     
-    //TODO: public let hitPoints: HitPoints?
+    public var hitPoints: HitPoints?
     
     //TODO: public let inventory: IItemsInventory?
     

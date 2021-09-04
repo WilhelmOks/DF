@@ -12,6 +12,7 @@ public final class Game {
     public let buildingTypes: BuildingTypeDefinition = .init()
     public let refinableTypes: RefinableTypeDefinition = .init()
     
+    public let resourceCreator: IResourceCreator! = nil //TODO: ...
     public let resources: Resources = .init()
     
     public private(set) var world: World!

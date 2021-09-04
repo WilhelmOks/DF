@@ -23,7 +23,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "DF_Logic",
-            dependencies: []),
+            dependencies: [],
+            resources: [
+                .copy("gfx")
+            ]
+        ),
         .testTarget(
             name: "DF_LogicTests",
             dependencies: ["DF_Logic"]),

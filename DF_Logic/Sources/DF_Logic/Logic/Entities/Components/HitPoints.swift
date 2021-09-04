@@ -17,6 +17,12 @@ public final class HitPoints: IWorldEntityComponent {
         self.worldEntity = worldEntity
     }
     
+    public init(worldEntity: WorldEntity, currentHitPoints: Int, maxHitpoints: Int) {
+        self.worldEntity = worldEntity
+        self.currentHitPoints = currentHitPoints
+        self.maxHitPoints = maxHitpoints
+    }
+    
     public func take(damage damagePoints: Int, from entity: WorldEntity) {
         if currentHitPoints > 0 {
             currentHitPoints -= damagePoints
