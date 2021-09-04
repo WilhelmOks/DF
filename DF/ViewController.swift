@@ -8,6 +8,7 @@
 import Cocoa
 import SpriteKit
 import GameplayKit
+//import DF_Logic
 
 class ViewController: NSViewController {
 
@@ -15,6 +16,8 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //let game = Game()
         
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
