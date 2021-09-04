@@ -21,15 +21,11 @@ public final class EntityFactory {
         building.hitPoints = HitPoints(worldEntity: building, currentHitPoints: type.maxHitpoints, maxHitpoints: type.maxHitpoints)
 
         if type.numberOfInventorySlots > 0 {
-            //TODO: ...
-            /*
             if type.inventorySlotsAreStacked {
                 building.inventory = StackedItemsInventory(worldEntity: building, numberOfSlots: type.numberOfInventorySlots)
-            }
-            else
-            {
+            } else {
                 building.inventory = SingleItemsInventory(worldEntity: building, numberOfSlots: type.numberOfInventorySlots)
-            }*/
+            }
         }
 
         if type.isItemGrabber {

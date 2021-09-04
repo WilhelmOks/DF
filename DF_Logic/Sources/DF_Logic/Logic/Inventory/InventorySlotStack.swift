@@ -8,14 +8,17 @@
 import Foundation
 
 public struct InventorySlotStack<T>: CustomStringConvertible {
-    //public typealias IT = T
-    
     public var itemType: T
     public var numberOfItems: Int
 
     public init(itemType: T, numberOfItems: Int) {
         self.itemType = itemType
         self.numberOfItems = numberOfItems
+    }
+    
+    public init(itemType: T) {
+        self.itemType = itemType
+        self.numberOfItems = 1
     }
     
     public var description: String {

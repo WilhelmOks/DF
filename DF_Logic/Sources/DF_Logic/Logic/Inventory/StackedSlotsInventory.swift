@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class StackedSlotsInventory<IT>: Inventory<InventorySlotStack<IT>, IT> where IT: Equatable & Hashable {
+public class StackedSlotsInventory<IT>: Inventory<IT> where IT: Equatable & Hashable {
     public func maxStackSize(itemType: IT) -> Int {
         //need to be overridden
         0

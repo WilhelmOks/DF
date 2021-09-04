@@ -8,6 +8,8 @@
 import Foundation
 
 public class WorldEntity: Entity, Identifiable {
+    public typealias Inv = Inventory<ItemType>
+    
     public let id = UUID()
     
     public unowned let game: Game
@@ -24,7 +26,7 @@ public class WorldEntity: Entity, Identifiable {
     
     public var hitPoints: HitPoints?
     
-    //public var inventory: IItemsInventory?
+    public var inventory: Inv?
     
     public var passable: Bool = false
     

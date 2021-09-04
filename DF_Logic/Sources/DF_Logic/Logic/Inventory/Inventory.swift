@@ -7,7 +7,9 @@
 
 import Foundation
 
-public class Inventory<T, IT>: IInventory, CustomStringConvertible {
+public class Inventory<IT>: IInventory, CustomStringConvertible {
+    public typealias T = InventorySlotStack<IT>
+    
     public var slots: [T?]
     
     public init(numberOfSlots: Int) {
@@ -138,6 +140,6 @@ public extension Inventory {
     }
     
     var description: String {
-        "Inventory Slots:\n" + slots.map{ ($0 as? CustomStringConvertible)?.description ?? "" }.joined(separator: "\n")
+        "Inventory Slots:\n" + slots.map{ $0?.description ?? "" }.joined(separator: "\n")
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 public protocol IInventory {
-    associatedtype T
-    associatedtype IT// = T
+    //associatedtype T
+    associatedtype IT
     
     func add(itemType: IT, numberOfItems: Int) -> Int
 

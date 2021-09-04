@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class SingleSlotsInventory<IT>: Inventory<IT, IT> where IT: Equatable & Hashable {
+public class SingleSlotsInventory<IT>: Inventory<IT> where IT: Equatable & Hashable {
     public override func isFull() -> Bool {
         slots.allSatisfy{ $0 != nil }
     }
@@ -21,7 +21,7 @@ public class SingleSlotsInventory<IT>: Inventory<IT, IT> where IT: Equatable & H
 
         for i in 0..<numberOfSlots {
             if slots[i] == nil {
-                slots[i] = itemType
+                slots[i] = .init(itemType: itemType) 
                 added += 1
                 remainingToAdd -= 1
                 if remainingToAdd <= 0 {
@@ -46,11 +46,11 @@ public class SingleSlotsInventory<IT>: Inventory<IT, IT> where IT: Equatable & H
     }
     
     public override func count(itemType: IT) -> Int {
-        slots.filter{ $0 == itemType }.count
+        slots.filter{ $0?.itemType == itemType }.count
     }
     
     public override func contains(itemType: IT) -> Bool {
-        slots.contains(itemType)
+        slots.contains{ $0?.itemType == itemType }
     }
     
     public override func remove(itemType: IT, numberOfItems: Int) -> Int {
@@ -62,7 +62,7 @@ public class SingleSlotsInventory<IT>: Inventory<IT, IT> where IT: Equatable & H
 
         for i in (0..<numberOfSlots).reversed() {
             let slot = slots[i]
-            if slot == itemType {
+            if slot?.itemType == itemType {
                 slots[i] = nil
                 removed += 1
                 remainingToRemove -= 1
@@ -84,7 +84,7 @@ public class SingleSlotsInventory<IT>: Inventory<IT, IT> where IT: Equatable & H
 
         for i in (0..<numberOfSlots).reversed() {
             let slot = slots[i]
-            if slot == itemType {
+            if slot?.itemType == itemType {
                 slots[i] = nil
                 removed += 1
             }
@@ -98,7 +98,7 @@ public class SingleSlotsInventory<IT>: Inventory<IT, IT> where IT: Equatable & H
     }
     
     public override func distinctContents() -> [IT] {
-        slots.compactMap{$0}.uniqueElements()
+        slots.compactMap{ $0?.itemType }.uniqueElements()
     }
     
     public override func removeOneFromSlot(_ slotIndex: Int) -> Bool {
