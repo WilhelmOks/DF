@@ -24,7 +24,7 @@ public class WorldEntity: Entity, Identifiable {
     
     public var hitPoints: HitPoints?
     
-    //TODO: public let inventory: IItemsInventory?
+    //public var inventory: IItemsInventory?
     
     public var passable: Bool = false
     

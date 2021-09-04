@@ -27,6 +27,9 @@ public final class ItemGrabber: IWorldEntityComponent {
         self.worldEntity = worldEntity
         self.inputMarker = inputMarker
         self.outputMarker = outputMarker
+        
+        self.inputMarker.itemGrabber = self
+        self.outputMarker.itemGrabber = self
     }
     
     public func update(elapsedTime: TimeInterval) {
@@ -36,11 +39,11 @@ public final class ItemGrabber: IWorldEntityComponent {
 
 public class ItemGrabberMarker: Equatable {
     public let id = UUID()
-    public unowned let itemGrabber: ItemGrabber
+    public unowned var itemGrabber: ItemGrabber!
     public private(set) var location: IntVector2
     
-    public init(itemGrabber: ItemGrabber, location: IntVector2) {
-        self.itemGrabber = itemGrabber
+    public init(location: IntVector2) {
+        //self.itemGrabber = itemGrabber
         self.location = location
     }
     

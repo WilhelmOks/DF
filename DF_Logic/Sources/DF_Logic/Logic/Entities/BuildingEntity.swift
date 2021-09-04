@@ -10,7 +10,7 @@ import Foundation
 public final class BuildingEntity: WorldEntity, Disposable {
     public let buildingType: BuildingType
     
-    public let itemGrabber: ItemGrabber?
+    public var itemGrabber: ItemGrabber?
     
     public init(game: Game, buildingType: BuildingType, itemGrabber: ItemGrabber?) {
         self.buildingType = buildingType

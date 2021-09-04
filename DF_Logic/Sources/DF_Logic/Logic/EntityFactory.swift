@@ -18,7 +18,27 @@ public final class EntityFactory {
         let building = BuildingEntity(game: game, buildingType: type, itemGrabber: nil)
         building.cellLocation = location
         building.offset = IntVector2(WorldEntity.offsetRange/2, WorldEntity.offsetRange/2)
-        //TODO: ...
+        building.hitPoints = HitPoints(worldEntity: building, currentHitPoints: type.maxHitpoints, maxHitpoints: type.maxHitpoints)
+
+        if type.numberOfInventorySlots > 0 {
+            //TODO: ...
+            /*
+            if type.inventorySlotsAreStacked {
+                building.inventory = StackedItemsInventory(worldEntity: building, numberOfSlots: type.numberOfInventorySlots)
+            }
+            else
+            {
+                building.inventory = SingleItemsInventory(worldEntity: building, numberOfSlots: type.numberOfInventorySlots)
+            }*/
+        }
+
+        if type.isItemGrabber {
+            building.itemGrabber = ItemGrabber(
+                worldEntity: building,
+                inputMarker: ItemGrabberInputMarker(location: location - IntVector2.unitX),
+                outputMarker: ItemGrabberOutputMarker(location: location + IntVector2.unitX - IntVector2.unitY)
+            )
+        }
         return building
     }
 }

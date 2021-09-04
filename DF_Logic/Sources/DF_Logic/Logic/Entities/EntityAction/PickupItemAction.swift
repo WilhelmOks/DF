@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+public final class PickupItemAction: ActionBase {
+    public weak var item: ItemEntity?
+    
+    public init(item: ItemEntity) {
+        self.item = item
+    }
+}
