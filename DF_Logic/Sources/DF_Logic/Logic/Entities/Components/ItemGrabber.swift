@@ -43,7 +43,6 @@ public class ItemGrabberMarker: Equatable {
     public private(set) var location: IntVector2
     
     public init(location: IntVector2) {
-        //self.itemGrabber = itemGrabber
         self.location = location
     }
     

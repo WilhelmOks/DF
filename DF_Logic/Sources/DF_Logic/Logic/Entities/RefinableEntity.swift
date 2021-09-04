@@ -8,9 +8,8 @@
 import Foundation
 
 public final class RefinableEntity: WorldEntity, Disposable {
-    //TODO: ...
-    
     public let refinableType: RefinableType
+    public var isTargetOfEntities: [MobileEntity] = []
     
     public init(game: Game, refinableType: RefinableType) {
         self.refinableType = refinableType
@@ -19,6 +18,10 @@ public final class RefinableEntity: WorldEntity, Disposable {
     }
     
     public func dispose() {
-        //TODO: ...
+        for targetingEntity in isTargetOfEntities {
+            targetingEntity.cancelPlan()
+        }
+        
+        isTargetOfEntities = []
     }
 }

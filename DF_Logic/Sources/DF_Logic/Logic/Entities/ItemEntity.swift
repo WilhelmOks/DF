@@ -8,9 +8,11 @@
 import Foundation
 
 public class ItemEntity: WorldEntity {
-    //TODO: ...
+    public let itemType: ItemType
+    public var targetedByEntity: MobileEntity?
     
-    public override init(game: Game) {
+    public init(game: Game, itemType: ItemType) {
+        self.itemType = itemType
         super.init(game: game)
     }
 }

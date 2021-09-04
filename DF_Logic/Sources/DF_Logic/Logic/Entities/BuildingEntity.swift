@@ -20,38 +20,19 @@ public final class BuildingEntity: WorldEntity, Disposable {
     }
     
     public func dispose() {
-        //TODO: ...
-        /*
-        if(ItemGrabber != null)
-        {
-            Game.World.ItemGrabberMarkedLocations.RemoveValue(ItemGrabber.InputMarker);
-            Game.World.ItemGrabberMarkedLocations.RemoveValue(ItemGrabber.OutputMarker);
-
-            ItemGrabber.WorldEntity = null;
-            ItemGrabber.InputMarker = null;
-            ItemGrabber.OutputMarker = null;
-            ItemGrabber = null;
+        if let itemGrabber = itemGrabber {
+            let _ = game.world.itemGrabberMarkedLocations.remove(value: itemGrabber.inputMarker)
+            let _ = game.world.itemGrabberMarkedLocations.remove(value: itemGrabber.outputMarker)
         }
 
-        if(HitPoints != null)
-        {
-            HitPoints.WorldEntity = null;
-            HitPoints = null;
-        }
-
-        if(Inventory != null)
-        {
-            Inventory.WorldEntity = null;
-            Inventory = null;
-        }
-
-        Game = null;
-        */
+        hitPoints = nil
+        inventory = nil
+        itemGrabber = nil
     }
     
     public override func update(elapsedTime: TimeInterval) {
         super.update(elapsedTime: elapsedTime)
         
-        //TODO: itemGrabber?.update(elapsedTime: elapsedTime)
+        itemGrabber?.update(elapsedTime: elapsedTime)
     }
 }

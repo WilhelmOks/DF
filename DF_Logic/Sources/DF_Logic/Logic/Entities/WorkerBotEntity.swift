@@ -7,7 +7,9 @@
 
 import Foundation
 
-public final class WorkerBotEntity: WorldEntity { //TODO: extend from MobileEntity
+public final class WorkerBotEntity: MobileEntity {
+    //TODO: ...
+    
     public override init(game: Game) {
         super.init(game: game)
     }

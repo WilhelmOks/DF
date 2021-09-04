@@ -35,7 +35,7 @@ public class WorldEntity: Entity, Identifiable {
     }
     
     public func deal(damage damagePoints: Int, to entity: WorldEntity) {
-        //TODO: entity.hitPoints?.take(damage: damagePoints, from: self)
+        entity.hitPoints?.take(damage: damagePoints, from: self)
     }
     
     public func update(elapsedTime: TimeInterval) {
