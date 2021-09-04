@@ -27,16 +27,16 @@ public extension Sequence where Element: AdditiveArithmetic {
     }
 }
 
-public extension Sequence {
-    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
+public extension Sequence {   
+    func sorted<T: Comparable>(by transform: (Element) -> T) -> [Element] {
         return sorted { lhs, rhs in
-            return lhs[keyPath: keyPath] < rhs[keyPath: keyPath]
+            return transform(lhs) < transform(rhs)
         }
     }
     
-    func sortedDescending<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
+    func sortedDescending<T: Comparable>(by transform: (Element) -> T) -> [Element] {
         return sorted { lhs, rhs in
-            return lhs[keyPath: keyPath] > rhs[keyPath: keyPath]
+            return transform(lhs) > transform(rhs)
         }
     }
 }

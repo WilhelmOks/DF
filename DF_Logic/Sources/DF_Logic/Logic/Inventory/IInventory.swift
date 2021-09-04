@@ -31,9 +31,9 @@ public protocol IInventory {
 
     func transfer<Inv>(to targetInventory: inout Inv, itemType: IT) -> Int where Inv: IInventory, Inv.IT == Self.IT
 
-    func canTransferAny<Inv>(targetInventory: Inv) -> Bool where Inv: IInventory, Inv.IT == Self.IT
+    func canTransferAny<Inv>(targetInventory: Inv?) -> Bool where Inv: IInventory, Inv.IT == Self.IT
 
-    func canTransferAny<Inv>(targetInventory: Inv, itemType: IT) -> Bool where Inv: IInventory, Inv.IT == Self.IT
+    func canTransferAny<Inv>(targetInventory: Inv?, itemType: IT) -> Bool where Inv: IInventory, Inv.IT == Self.IT
 
     func distinctContents() -> [IT]
 

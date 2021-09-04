@@ -36,6 +36,10 @@ public final class World {
     
     public var entities: ListDictionary<IntVector2, WorldEntity> = .init()
     
+    public var itemEntities: [ItemEntity] = []
+    public var treeEntities: [WorldEntity] = []
+    public var containerEntities: [BuildingEntity] = []
+    
     public private(set) var itemGrabberMarkedLocations: ListDictionary<IntVector2, ItemGrabberMarker> = .init()
     
     private var workerBotsAdded = false

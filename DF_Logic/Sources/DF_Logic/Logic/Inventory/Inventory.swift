@@ -107,7 +107,6 @@ public extension Inventory {
         slots.firstIndex{ $0 == nil }
     }
     
-    //func transfer<Inv>(to targetInventory: inout Inv) -> Int where Inv: Inventory, Inv.T == T {
     func transfer<Inv>(to targetInventory: inout Inv) -> Int where Inv : IInventory, IT == Inv.IT {
         var transferred = 0
         let itemTypes = distinctContents()
@@ -127,11 +126,13 @@ public extension Inventory {
         return transferred
     }
     
-    func canTransferAny<Inv>(targetInventory: Inv) -> Bool where Inv: IInventory, Inv.IT == IT {
-        distinctContents().contains{ targetInventory.canBeAddedAny(itemType: $0) }
+    func canTransferAny<Inv>(targetInventory: Inv?) -> Bool where Inv: IInventory, Inv.IT == IT {
+        guard let targetInventory = targetInventory else { return false }
+        return distinctContents().contains{ targetInventory.canBeAddedAny(itemType: $0) }
     }
     
-    func canTransferAny<Inv>(targetInventory: Inv, itemType: IT) -> Bool where Inv: IInventory, Inv.IT == IT {
+    func canTransferAny<Inv>(targetInventory: Inv?, itemType: IT) -> Bool where Inv: IInventory, Inv.IT == IT {
+        guard let targetInventory = targetInventory else { return false }
         if !contains(itemType: itemType) {
             return false
         } else {
