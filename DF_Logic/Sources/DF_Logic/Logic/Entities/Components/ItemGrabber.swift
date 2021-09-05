@@ -33,7 +33,23 @@ public final class ItemGrabber: IWorldEntityComponent {
     }
     
     public func update(elapsedTime: TimeInterval) {
-        //TODO: ...
+        let markerLocation = outputMode ? outputMarker.location : inputMarker.location
+        let vMarker = (markerLocation - worldEntity.cellLocation).vector2
+        let vHand = handLocation
+
+        let angleDelta = vHand.angleDelta(to: vMarker)
+        let angleDeltaAbs = abs(angleDelta)
+        if angleDeltaAbs > ItemGrabber.angleEpsilon {
+            let sign: Double = angleDelta < 0 ? -1 : angleDelta > 0 ? 1 : 0
+
+            var aStep = elapsedTime * ItemGrabber.armAngularVelocityRadiansPerSecond
+            if aStep > angleDeltaAbs {
+                aStep = angleDeltaAbs
+            }
+            handLocation = handLocation.rotated(by: aStep * sign)
+        } else {
+            outputMode = !outputMode
+        }
     }
 }
 

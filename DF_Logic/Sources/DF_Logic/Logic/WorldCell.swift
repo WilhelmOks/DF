@@ -18,12 +18,12 @@ public struct WorldCell {
 
 public enum Ground: Int {
     case none
-    case earth //TODO: rename to soil?
+    case soil
     case grass
     case sand
 }
 
 public enum Wall: Int {
     case none
-    case earth //TODO: rename to soil?
+    case soil
 }

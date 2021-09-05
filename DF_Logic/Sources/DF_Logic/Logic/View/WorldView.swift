@@ -103,7 +103,7 @@ public extension WorldView {
             if let cell = cell {
                 let variant = cell.groundVariant
                 if let tile = gameView.game.resources.bitmaps.tiles.worldGround[ground]?[variant] {
-                    if ground == Ground.sand || ground == Ground.earth {
+                    if ground == Ground.sand || ground == Ground.soil {
                         gameView.renderer.drawBitmapFromSpriteBatch(tile, location: p, size: zoomedCellSize1)
                     }
                 }
@@ -191,14 +191,12 @@ public extension WorldView {
                         let renderSize = bitmap.sizeInPixels.vector2 * viewPort.spaceZoom
                         gameView.renderer.drawBitmapFromSpriteBatch(bitmap, location: p + offset + Vector2(0, -elevationOffset), size: renderSize)
 
-                        //TODO: uncomment
-                        /*
-                        if workerBot.isAttacking, let attackEntityAction = workerBot.plannedAction as? AttackEntityAction {
-                            var attackEffect = bitmaps.effects.beam!
-                            var diff = (attackEntityAction.entityToAttack.cellLocation - workerBot.cellLocation).vector2 * worldViewCellSize.vector2 + (attackEntityAction.entityToAttack.realOffset - workerBot.realOffset) * worldViewCellSize.vector2 * 0.5
-                            var rotationAngle = atan2(diff.y, diff.x)
+                        if workerBot.isAttacking, let attackEntityAction = workerBot.plannedAction as? AttackEntityAction, let entityToAttack = attackEntityAction.entityToAttack {
+                            let attackEffect = bitmaps.effects.beam!
+                            let diff = (entityToAttack.cellLocation - workerBot.cellLocation).vector2 * worldViewCellSize.vector2 + (entityToAttack.realOffset - workerBot.realOffset) * worldViewCellSize.vector2 * 0.5
+                            let rotationAngle = atan2(diff.y, diff.x)
                             gameView.renderer.drawBitmapFromSpriteBatch(attackEffect, location: p + offset + Vector2(0, -elevationOffset) + renderSize * 0.5 + Vector2(0, -3) * viewPort.spaceZoom, size: attackEffect.sizeInPixels.vector2 * viewPort.spaceZoom, rotationAngle: rotationAngle, rotationPoint: Vector2(0, Double(attackEffect.sizeInPixels.y) * 0.5))
-                        }*/
+                        }
                     case let itemEntity as ItemEntity:
                         let bitmap = bitmaps.items.wood!
                         let offset = itemEntity.realOffset * zoomedCellSizeHalf
@@ -263,7 +261,7 @@ public extension WorldView {
             let cellLocation = point.cellCoordinates
             let color: Color
             switch point.ground {
-            case Ground.earth: color = NSColor.red.cgColor
+            case Ground.soil: color = NSColor.red.cgColor
             case Ground.grass: color = NSColor.green.cgColor
             case Ground.sand: color = NSColor.yellow.cgColor
             default: color = .black

@@ -11,7 +11,7 @@ import AppKit
 public final class WorldGenerator {
     public unowned let world: World
     
-    let possibleGrounds: [Ground] = [.earth, .sand, .sand]
+    let possibleGrounds: [Ground] = [.soil, .sand, .sand]
     
     init(world: World) {
         self.world = world
@@ -51,7 +51,7 @@ public final class WorldGenerator {
             let min = points.min(by: { p in p.key.distanceSquared(to: absCoord) })!
             let ground = min.value
 
-            if ground == .earth {
+            if ground == .soil {
                 let distanceToVoronoidFit = min.key.distance(to: absCoord)
                 let treePercentChance = Int(1.0 / distanceToVoronoidFit * 100.0)
                 let shouldPlaceTree = rng.percentChance(treePercentChance)
@@ -71,7 +71,7 @@ public final class WorldGenerator {
 
             chunk[coordinate] = WorldCell(
                 ground: pointsFound ? ground : .none,
-                wall: ground == .earth ? .earth : .none,
+                wall: ground == .soil ? .soil : .none,
                 groundVariant: rng.next(numberOfVariations)
             )
         }

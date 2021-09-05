@@ -108,11 +108,9 @@ public final class MainWorldView: WorldView {
 
         if let clickedEntities = world.entities[clickedCell] {
             for e in clickedEntities {
-                /* TODO: 
-                if let inventory = e?.inventory {
-                    print("\(e.type) \(inventory)")
+                if let inventory = e.inventory {
+                    print("\(type(of: e)) \(inventory)")
                 }
-                */
             }
         }
 

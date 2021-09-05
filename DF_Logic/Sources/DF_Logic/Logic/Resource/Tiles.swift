@@ -29,7 +29,7 @@ public final class Tiles: IResourceContainer {
         
         (
             worldGround[.sand],
-            worldGround[.earth]
+            worldGround[.soil]
         ) = await (
             TileWithVariations(tiles: [a0, a1, a2, a3]),
             TileWithVariations(tiles: [w0, w1, w2, w3, w4, w5])

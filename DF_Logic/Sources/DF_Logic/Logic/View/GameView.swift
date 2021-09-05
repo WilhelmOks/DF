@@ -10,7 +10,7 @@ import AppKit
 
 public final class GameView: BaseView {
     public var renderer: IRenderer
-    public var game: Game
+    public unowned var game: Game
     
     public var isHovored: Bool = false
     public var isDragging: Bool = false
