@@ -42,7 +42,6 @@ class GameScene: SKScene {
         }
     }
     
-    
     func touchDown(atPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
@@ -89,7 +88,6 @@ class GameScene: SKScene {
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
         }
     }
-    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
