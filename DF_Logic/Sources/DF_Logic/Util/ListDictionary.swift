@@ -151,10 +151,6 @@ public final class ListDictionary<Key: Hashable, Value: Equatable> {
     public func pairs() -> [Dictionary<Key, [Value]>.Element] {
         return dictionary.map{$0}
     }
-    
-    /*public func pairs() -> some Sequence {
-        return dictionary
-    }*/
 
     public var isEmpty: Bool {
         dictionary.isEmpty

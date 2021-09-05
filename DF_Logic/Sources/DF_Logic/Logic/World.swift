@@ -186,31 +186,23 @@ public final class World {
 
         var mobileEntities: [MobileEntity] = []
 
-        for entities in entities.pairs() {
-            //let cellLocation = entities.key
-
-            for entity in entities.value {
-                switch entity {
-                case let mobileEntity as MobileEntity:
-                    mobileEntities.append(mobileEntity)
-                case let itemEntity as ItemEntity:
-                    itemEntities.append(itemEntity)
-                case let treeEntity as RefinableEntity where treeEntity.refinableType === game.refinableTypes.tree:
-                    treeEntities.append(treeEntity)
-                case let buildingEntity as BuildingEntity where buildingEntity.buildingType === game.buildingTypes.container:
-                    containerEntities.append(buildingEntity)
-                default:
-                    break
-                }
+        for entity in entities.flatValues() {
+            switch entity {
+            case let mobileEntity as MobileEntity:
+                mobileEntities.append(mobileEntity)
+            case let itemEntity as ItemEntity:
+                itemEntities.append(itemEntity)
+            case let treeEntity as RefinableEntity where treeEntity.refinableType === game.refinableTypes.tree:
+                treeEntities.append(treeEntity)
+            case let buildingEntity as BuildingEntity where buildingEntity.buildingType === game.buildingTypes.container:
+                containerEntities.append(buildingEntity)
+            default:
+                break
             }
         }
-
-        for entities in entities.pairs() {
-            //let cellLocation = entities.key
-
-            for entity in entities.value {
-                entity.update(elapsedTime: elapsedTime)
-            }
+        
+        for entity in entities.flatValues() {
+            entity.update(elapsedTime: elapsedTime)
         }
 
         for entity in mobileEntities {
