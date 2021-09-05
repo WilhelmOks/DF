@@ -31,7 +31,7 @@ public final class ChunkMap<T> /*where T: AnyObject*/ {
         return .init(x: x, y: y)
     }
 
-    public func cell(in chunk: IntVector2, cellCoordinates: IntVector2) -> IntVector2 {
+    public func cell(inChunk chunk: IntVector2, cellCoordinates: IntVector2) -> IntVector2 {
         let w = chunk.x * chunkSize.x
         let h = chunk.y * chunkSize.y
         let x = chunk.x >= 0 ? cellCoordinates.x % chunkSize.x : (cellCoordinates.x - w)

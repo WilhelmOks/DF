@@ -139,6 +139,22 @@ public final class ListDictionary<Key: Hashable, Value: Equatable> {
     public func enumerated() -> EnumeratedSequence<[Key: [Value]]> {
         dictionary.enumerated()
     }
+    
+    public func values() -> [[Value]] {
+        dictionary.values.map{$0}
+    }
+    
+    public func flatValues() -> [Value] {
+        dictionary.values.flatMap{$0}
+    }
+    
+    public func pairs() -> [Dictionary<Key, [Value]>.Element] {
+        return dictionary.map{$0}
+    }
+    
+    /*public func pairs() -> some Sequence {
+        return dictionary
+    }*/
 
     public var isEmpty: Bool {
         dictionary.isEmpty
