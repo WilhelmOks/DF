@@ -5,6 +5,9 @@
       location = "group:DF_Logic">
    </FileRef>
    <FileRef
+      location = "group:DF_SceneKit.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:DF_Metal.xcodeproj">
    </FileRef>
    <FileRef

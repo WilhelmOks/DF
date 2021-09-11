@@ -11,6 +11,8 @@ import Metal
 import MetalKit
 import simd
 
+//TODO: check CADisplayLink (https://www.raywenderlich.com/7475-metal-tutorial-getting-started)
+
 // The 256 byte aligned size of our uniform structure
 let alignedUniformsSize = (MemoryLayout<Uniforms>.size + 0xFF) & -0x100
 
@@ -266,6 +268,7 @@ class Renderer: NSObject, MTKViewDelegate {
                                                             indexBuffer: submesh.indexBuffer.buffer,
                                                             indexBufferOffset: submesh.indexBuffer.offset)
                         
+                        //renderEncoder.drawPrimitives(type: .triangle, vertexStart: 1, vertexCount: 1)
                     }
                     
                     renderEncoder.popDebugGroup()
@@ -280,6 +283,12 @@ class Renderer: NSObject, MTKViewDelegate {
             
             commandBuffer.commit()
         }
+        
+        customDraw()
+    }
+    
+    private func customDraw() {
+        
     }
 
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {

@@ -29,7 +29,7 @@ class ViewController: NSViewController {
                 // Copy gameplay related content over to the scene
                 sceneNode.entities = scene.entities
                 sceneNode.graphs = scene.graphs
-                
+                                
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill
                 
