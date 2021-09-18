@@ -9,22 +9,26 @@
 /* Begin PBXBuildFile section */
 		EDAC4E1526ED033500E4554F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4E1426ED033500E4554F /* AppDelegate.swift */; };
 		EDAC4E1726ED033500E4554F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4E1626ED033500E4554F /* GameViewController.swift */; };
-		EDAC4E1926ED033500E4554F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4E1826ED033500E4554F /* Renderer.swift */; };
+		EDAC4E1926ED033500E4554F /* OldRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4E1826ED033500E4554F /* OldRenderer.swift */; };
 		EDAC4E1B26ED033500E4554F /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4E1A26ED033500E4554F /* Shaders.metal */; };
 		EDAC4E1E26ED033700E4554F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDAC4E1D26ED033700E4554F /* Assets.xcassets */; };
 		EDAC4E2126ED033700E4554F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAC4E1F26ED033700E4554F /* Main.storyboard */; };
 		EDAC4E3026ED043500E4554F /* DF_Logic in Frameworks */ = {isa = PBXBuildFile; productRef = EDAC4E2F26ED043500E4554F /* DF_Logic */; };
+		EDAC4E5126F6060900E4554F /* OldGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4E5026F6060900E4554F /* OldGameViewController.swift */; };
+		EDAC4E5326F60AC700E4554F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4E5226F60AC700E4554F /* Renderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EDAC4E1126ED033500E4554F /* DF_Metal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DF_Metal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDAC4E1426ED033500E4554F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDAC4E1626ED033500E4554F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		EDAC4E1826ED033500E4554F /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		EDAC4E1826ED033500E4554F /* OldRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldRenderer.swift; sourceTree = "<group>"; };
 		EDAC4E1A26ED033500E4554F /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		EDAC4E1C26ED033500E4554F /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		EDAC4E1D26ED033700E4554F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDAC4E2026ED033700E4554F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EDAC4E5026F6060900E4554F /* OldGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldGameViewController.swift; sourceTree = "<group>"; };
+		EDAC4E5226F60AC700E4554F /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				EDAC4E1426ED033500E4554F /* AppDelegate.swift */,
+				EDAC4E5026F6060900E4554F /* OldGameViewController.swift */,
+				EDAC4E1826ED033500E4554F /* OldRenderer.swift */,
 				EDAC4E1626ED033500E4554F /* GameViewController.swift */,
-				EDAC4E1826ED033500E4554F /* Renderer.swift */,
+				EDAC4E5226F60AC700E4554F /* Renderer.swift */,
 				EDAC4E1A26ED033500E4554F /* Shaders.metal */,
 				EDAC4E1C26ED033500E4554F /* ShaderTypes.h */,
 				EDAC4E1D26ED033700E4554F /* Assets.xcassets */,
@@ -150,9 +156,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDAC4E5126F6060900E4554F /* OldGameViewController.swift in Sources */,
 				EDAC4E1B26ED033500E4554F /* Shaders.metal in Sources */,
 				EDAC4E1726ED033500E4554F /* GameViewController.swift in Sources */,
-				EDAC4E1926ED033500E4554F /* Renderer.swift in Sources */,
+				EDAC4E1926ED033500E4554F /* OldRenderer.swift in Sources */,
+				EDAC4E5326F60AC700E4554F /* Renderer.swift in Sources */,
 				EDAC4E1526ED033500E4554F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
